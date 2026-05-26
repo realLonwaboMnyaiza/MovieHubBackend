@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MovieHub.Models;
-using MovieHub.ViewModels;
+using MovieHub.Web.ViewModels;
 
-namespace MovieHub.Controllers;
+namespace MovieHub.Web.Controllers;
 
 public class CustomerController : Controller
 {

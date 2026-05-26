@@ -1,4 +1,4 @@
-namespace MovieHub.ViewModels;
+namespace MovieHub.Web.ViewModels;
 
 public class Customer
 {

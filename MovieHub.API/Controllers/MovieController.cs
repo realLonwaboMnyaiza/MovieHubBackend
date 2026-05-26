@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieHub.Web.ViewModels;
+using MovieHub.ViewModels;
 
-namespace MovieHub.Web.Controllers;
+namespace MovieHub.Controllers;
 
 public class MovieController : Controller
 {
