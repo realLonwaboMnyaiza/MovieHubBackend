@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nNhFoXKexbbkaTsiI/V++Ezyq4f3keQxjLIiFPQU/16sVifRSdJUf9PESPJUwgDf6zxBH5N8q2GTPdJTabC6AA==",
+  "dgSpecHash": "Ds76nk8jt9r6y4AZgvOrbra7GrjrCJE9OrRX1lxoMrQx0pn/W0/tZ6EUjApdthI6PpX9YGCceMYitIPu1ibgxg==",
   "success": true,
-  "projectFilePath": "/home/pablox/Documents/Projects/DotNet/MovieHubWebsite/MovieHub/MovieHub.csproj",
+  "projectFilePath": "/home/pablox/Documents/Projects/DotNet/MovieHub/MovieHub.Web/MovieHub.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

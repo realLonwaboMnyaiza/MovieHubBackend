@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/pablox/Documents/Projects/DotNet/MovieHubWebsite/MovieHub/MovieHub.csproj",
+      "projectUniqueName": "/home/pablox/Documents/Projects/DotNet/MovieHub/MovieHub.Web/MovieHub.csproj",
       "projectName": "MovieHub",
-      "projectPath": "/home/pablox/Documents/Projects/DotNet/MovieHubWebsite/MovieHub/MovieHub.csproj",
+      "projectPath": "/home/pablox/Documents/Projects/DotNet/MovieHub/MovieHub.Web/MovieHub.csproj",
       "packagesPath": "/home/pablox/.nuget/packages/",
-      "outputPath": "/home/pablox/Documents/Projects/DotNet/MovieHubWebsite/MovieHub/obj/",
+      "outputPath": "/home/pablox/Documents/Projects/DotNet/MovieHub/MovieHub.Web/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/pablox/.nuget/NuGet/NuGet.Config"
