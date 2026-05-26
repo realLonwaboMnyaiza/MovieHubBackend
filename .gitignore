@@ -3,3 +3,6 @@
 bin
 obj
 packages
+
+# temp need to use secrets.
+appsettings.json
