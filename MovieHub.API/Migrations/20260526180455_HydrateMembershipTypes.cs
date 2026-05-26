@@ -11,7 +11,7 @@ namespace MovieHub.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"insert into MembershipType 
-                (SignUpFee, DurationInMonth, DiscountRate)
+                (Id, SignUpFee, DurationInMonths, DiscountRate)
                 values 
                 (1, 0, 0, 0),
                 (2, 30, 1, 10),
@@ -22,7 +22,7 @@ namespace MovieHub.API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("delete * from MemberShipType");
+            migrationBuilder.Sql("delete * from MemberShipType where Id in (1,2,3,4)");
         }
     }
 }
