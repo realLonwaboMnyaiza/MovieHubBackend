@@ -10,7 +10,7 @@ namespace MovieHub.API.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            Sql(@"insert into MembershipType 
+            migrationBuilder.Sql(@"insert into MembershipType 
                 (SignUpFee, DurationInMonth, DiscountRate)
                 values 
                 (1, 0, 0, 0),
@@ -22,7 +22,7 @@ namespace MovieHub.API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            Sql("delete * from MemberShipType");
+            migrationBuilder.Sql("delete * from MemberShipType");
         }
     }
 }
