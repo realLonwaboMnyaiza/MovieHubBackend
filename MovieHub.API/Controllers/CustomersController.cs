@@ -24,9 +24,24 @@ public class CustomerController : Controller
         return View(customers);
     }
 
-    public IActionResult NewCustomer() 
+    [HttpGet]
+    public IActionResult HydrateCustomerForm()
     {
+        var membershipTypes = _context.MembershipTypes.ToList();
+    }
 
+    [HttpPost]
+    public IActionResult CreateCustomer(Customer customer) 
+    {
+       _context.Customers.Add(customer);
+       _context.SaveChanges();
+    }
+
+    public IActionResult EditCustomer(int id)
+    {
+        var customer = _context.Customers.SingleOrDefault(c => c.id == id);
+
+        if (customer is null) return HttpNotFound();
     }
 
     public IActionResult Details(int id)
