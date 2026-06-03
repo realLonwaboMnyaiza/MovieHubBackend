@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MovieHub.Models;
+using MovieHub.Web.Models;
 using MovieHub.Web.ViewModels;
 
 namespace MovieHub.Web.Controllers;
