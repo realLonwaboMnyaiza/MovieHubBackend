@@ -28,7 +28,7 @@ public class CustomerController : Controller
     }
 
 
-    public IActionResult CreateCustomer()
+    public IActionResult NewCustomer()
     {
         var membershipTypes = GetMembershipTypes();
         var viewModel = new CustomerForm

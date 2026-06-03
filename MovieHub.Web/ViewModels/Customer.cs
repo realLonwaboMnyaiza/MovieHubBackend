@@ -11,7 +11,7 @@ public class Customer
     public string Name { get; set; }
 
     [Display(Name = "Date of Birth")]
-    public Date Birthdate { get; set; }
+    public DateTime Birthdate { get; set; }
 
     public bool IsSubscribed { get; set; }
     
