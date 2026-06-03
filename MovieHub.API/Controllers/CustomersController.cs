@@ -1,7 +1,9 @@
 using MovieHub.API.Data;
 using MovieHub.API.Models;
+using MovieHub.API.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace MovieHub.Controllers;
 
@@ -9,36 +11,40 @@ namespace MovieHub.Controllers;
 [Route("api/customers")]
 public class CustomerController : ControllerBase
 {
-    private readonly ILogger<CustomerController> _logger;
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly ILogger<CustomerController> _logger;
 
-    public CustomerController(ApplicationDbContext context, ILogger<CustomerController> logger)
+    public CustomerController(ApplicationDbContext context, IMapper mapper, ILogger<CustomerController> logger)
     {
-        _logger = logger;
         _context = context;
+        _mapper = mapper;
+        _logger = logger;
     }
 
     [HttpGet]
-    public IEnumerable<Customer> GetCustomers()
+    public IEnumerable<CustomerDto> GetCustomers()
     {
-        var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+        var customers = _context.Customers
+                        .Include(c => c.MembershipType).ToList()
+                        .Select(c => _mapper.Map<CustomerDto>(c));
         return customers;
     }
 
     [HttpGet]
     [Route("{id:int}")]
-    public ActionResult<Customer> GetCustomer(int id)
+    public ActionResult<CustomerDto> GetCustomer(int id)
     {
         var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
         if (customer is null)
             return NotFound();
 
-        return customer;
+        return _mapper.Map<CustomerDto>(customer);
     }
 
     [HttpPost]
-    public ActionResult<Customer> CreateCustomer(Customer customer)
+    public ActionResult<CustomerDto> CreateCustomer(Customer customer)
     {
         if (!ModelState.IsValid)
             return BadRequest();
@@ -46,12 +52,12 @@ public class CustomerController : ControllerBase
         _context.Customers.Add(customer);
         _context.SaveChanges();
 
-        return customer;
+        return _mapper.Map<CustomerDto>(customer);
     }
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<Customer> EditCustomer(Customer customer)
+    public ActionResult<CustomerDto> EditCustomer(Customer customer)
     {
         if (!ModelState.IsValid)
             return BadRequest();
@@ -69,7 +75,7 @@ public class CustomerController : ControllerBase
 
         _context.SaveChanges();
 
-        return customer;
+        return _mapper.Map<CustomerDto>(customer);
     }
 
     [HttpDelete]
