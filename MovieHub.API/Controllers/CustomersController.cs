@@ -26,6 +26,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet]
+    [Route("{id:int}")]
     public ActionResult<Customer> GetCustomer(int id)
     {
         var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -49,7 +50,8 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPut]
-    public ActionResult<Customer> EditCustomer(int id, Customer customer)
+    [Route("{id:int}")]
+    public ActionResult<Customer> EditCustomer(Customer customer)
     {
         if (!ModelState.IsValid)
             return BadRequest();
@@ -71,6 +73,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpDelete]
+    [Route("{id:int}")]
     public ActionResult<Customer> DeleteCustomer(int id)
     {
         var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
