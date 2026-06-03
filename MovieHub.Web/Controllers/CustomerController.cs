@@ -55,9 +55,13 @@ public class CustomerController : Controller
     }
 
     [HttpPost]
-    public IActionResult SubmitCustomerForm(CustomerForm customer) 
+    public IActionResult SubmitCustomerForm(CustomerForm customerForm) 
     {
-      return RedirectToAction("Index", "Customer");
+        if (!ModelState.IsValid)
+        {
+            return View("CustomerForm", customerForm);
+        }
+        return RedirectToAction("Index", "Customer");
     }
 
     public IActionResult Privacy()
