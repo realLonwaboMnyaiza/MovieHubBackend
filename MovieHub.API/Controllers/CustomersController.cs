@@ -24,6 +24,11 @@ public class CustomerController : Controller
         return View(customers);
     }
 
+    public IActionResult NewCustomer() 
+    {
+
+    }
+
     public IActionResult Details(int id)
     {
         var customer = _context.SingleOrDefault(c => c.Id == id);
