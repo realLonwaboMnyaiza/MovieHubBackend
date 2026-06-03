@@ -57,6 +57,7 @@ public class CustomerController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult SubmitCustomerForm(CustomerForm customerForm) 
     {
         if (!ModelState.IsValid)

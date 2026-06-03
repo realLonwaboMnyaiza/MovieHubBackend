@@ -10,6 +10,9 @@
 {
     @Html.ValidationSummary()
     @Html.HiddenFor(m = m.Customer.Id)
+    // protect against CSRF
+    @Html.AntiForgeryToken()
+
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.Name)
         @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control"})
