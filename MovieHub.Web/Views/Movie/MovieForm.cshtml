@@ -1,4 +1,3 @@
-
 @model MovieHub.Web.ViewModels.MovieForm;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,38 +5,37 @@
 
 <h2>@Model.Title</h2>
 
-@using (Html.BeginForm("SubmitMovieForm", Movie))
+@using (Html.BeginForm("SubmitMovieForm", "Movie"))
 {
     @Html.ValidationSummary()
-    @Html.HiddenFor(m = m.Movie.Id)
+    @Html.HiddenFor(m => m.Movie.Id)
     @Html.AntiForgeryToken()
 
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Name)
-        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control"})
+        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Movie.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.NumberInStock)
-        @Html.TextBoxFor(m => m.Movie.NumberInStock, new { @class = "form-control"})
+        @Html.TextBoxFor(m => m.Movie.NumberInStock, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Movie.NumberInStock)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.ReleaseDate)
-        @Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:d MMM yyyy}" new { @class = "form-control"})
+        @Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Movie.ReleaseDate)
     </div>
-     <div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(m => m.Genres)
-        @Html.DropDownListFor(m => m.Movie.GenreId, new SelectedList(Model.Genres, "Id", "Name"), "Select Genre",  new { @class = "form-control"})
+        @Html.DropDownListFor(m => m.Movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "Select Genre", new
+        {
+            @class = "form-control"
+        })
         @Html.ValidationMessageFor(m => m.Genres)
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
 }
 
-@section scripts 
-{
-    <!-- jquery.validate -->
-    @Scripts.Render("~/wwwroot/lib/jquery-validation")
-}
+<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>

@@ -1,26 +1,27 @@
 ﻿@model IList<MovieHub.Web.ViewModels.Customer>
 
-    <h1 class="display-5">Customers</h1>
-    @if (Model.Count() < 1)
-    {
-        <p>We don't have any customers yet.</p>
-    }
-    else
-    {
-        <table class="table table-bordered table-hover">
-            <thead> 
+<h1 class="display-5">Customers</h1>
+@if (Model.Count() < 1)
+{
+    <p>We don't have any customers yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Membership type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
                 <tr>
-                    <th>Customer</th>
-                    <th>Membership type</th>
+                    <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id })</td>
+                    <td>@customer.MembershipType.Name</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in Model)
-                {
-                    <tr>
-                        <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id })</td>
-                        <td>@customer.MembershipType.Name</td>
-                    </tr>
-                }
-            </tbody>
-    }
+            }
+        </tbody>
+    </table>
+}

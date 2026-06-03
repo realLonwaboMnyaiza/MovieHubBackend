@@ -1,7 +1,7 @@
-using System.Text;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MovieHub.Web.Models;
+using System.Collections.Generic;
 using MovieHub.Web.ViewModels;
 
 namespace MovieHub.Web.Controllers;
@@ -30,22 +30,22 @@ public class CustomerController : Controller
 
     public IActionResult NewCustomer()
     {
-        var customer  = new Customer();
+        var customer = new Customer();
         var membershipTypes = GetMembershipTypes();
         var viewModel = new CustomerForm
         {
             Customer = customer,
             MembershipTypes = membershipTypes,
-        }
+        };
 
         return View("CustomerForm", membershipTypes);
     }
 
     public IActionResult EditCustomer(int id)
     {
-        var customer = customers.SingleOrDefault(c => c.id == id);
+        var customer = customers.SingleOrDefault(c => c.Id == id);
 
-        if (customer is null) return HttpNotFound();
+        if (customer is null) return NotFound();
 
         var viewModel = new CustomerForm
         {
@@ -58,7 +58,7 @@ public class CustomerController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SubmitCustomerForm(CustomerForm customerForm) 
+    public IActionResult SubmitCustomerForm(CustomerForm customerForm)
     {
         if (!ModelState.IsValid)
         {
@@ -79,19 +79,19 @@ public class CustomerController : Controller
     }
 
 
-    static private Customer CreateCustomer(int id, string name) 
+    static private Customer CreateCustomer(int id, string name)
     {
-       return new Customer
+        return new Customer
         {
             Id = id,
-            Name = name, 
-        }; 
+            Name = name,
+        };
     }
 
 
     static private IList<MembershipType> GetMembershipTypes()
     {
-        var membershipTypes = new List();
+        var membershipTypes = new List<MembershipType>();
         var basicPlan = new MembershipType
         {
             Id = 1,
@@ -99,7 +99,7 @@ public class CustomerController : Controller
             DurationInMonths = 0,
             DiscountRate = 0
         };
-        membershipTypes.add(basicPlan);
+        membershipTypes.Add(basicPlan);
         return membershipTypes;
     }
 }

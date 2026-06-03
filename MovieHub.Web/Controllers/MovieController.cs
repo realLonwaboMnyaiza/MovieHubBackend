@@ -17,7 +17,7 @@ public class MovieController : Controller
     {
         var movie1 = CreateMovie(1, "Matrix");
         var movie2 = CreateMovie(2, "Rush Hour");
-        
+
         movies.Add(movie1);
         movies.Add(movie2);
 
@@ -35,11 +35,11 @@ public class MovieController : Controller
         return View("MovieForm", genres);
     }
 
-    public IActionResult EditCustomer(int id)
+    public IActionResult EditMovie(int id)
     {
-        var customers customers.SingleOrDefault(c => c.id == id);
+        var movie = movies.SingleOrDefault(c => c.Id == id);
 
-        if (customer is null) return HttpNotFound();
+        if (movie is null) return NotFound();
 
         var viewModel = new MovieForm
         {
@@ -55,31 +55,31 @@ public class MovieController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return View("MovieForm", movieForm)
+            return View("MovieForm", movieForm);
         }
         return RedirectToAction("Index", "Movie");
     }
 
-     static private Customer CreateMovie(int id, string name) 
+    static private Movie CreateMovie(int id, string name)
     {
-       return new Customer
+        return new Movie
         {
             Id = id,
-            Name = name, 
-        }; 
+            Name = name,
+        };
     }
 
 
-    static private IList<Genres> GetMovieGenres()
+    static private IList<Genre> GetMovieGenres()
     {
-        var genres = new List()
+        var genres = new List<Genre>()
         {
-            new Genres
+            new Genre
             {
                 Id = 1,
                 Name= "Action"
             },
-            new Genres
+            new Genre
             {
                 Id = 2,
                 Name= "Sci-Fi"
