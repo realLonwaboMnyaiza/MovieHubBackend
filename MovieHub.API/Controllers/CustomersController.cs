@@ -44,20 +44,20 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<CustomerDto> CreateCustomer(Customer customer)
+    public ActionResult<CustomerDto> CreateCustomer(CustomerDto customer)
     {
         if (!ModelState.IsValid)
             return BadRequest();
 
-        _context.Customers.Add(customer);
+        _context.Customers.Add(_mapper.Map<Customer>(customer));
         _context.SaveChanges();
 
-        return _mapper.Map<CustomerDto>(customer);
+        return customer;
     }
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<CustomerDto> EditCustomer(Customer customer)
+    public ActionResult<CustomerDto> EditCustomer(CustomerDto customer)
     {
         if (!ModelState.IsValid)
             return BadRequest();
@@ -75,12 +75,12 @@ public class CustomerController : ControllerBase
 
         _context.SaveChanges();
 
-        return _mapper.Map<CustomerDto>(customer);
+        return _mapper.Map<CustomerDto>(savedCustomer);
     }
 
     [HttpDelete]
     [Route("{id:int}")]
-    public ActionResult<Customer> DeleteCustomer(int id)
+    public ActionResult<CustomerDto> DeleteCustomer(int id)
     {
         var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
@@ -90,6 +90,6 @@ public class CustomerController : ControllerBase
         _context.Customers.Remove(customer);
         _context.SaveChanges();
 
-        return customer;
+        return _mapper.Map<CustomerDto>(customer);
     }
 }
