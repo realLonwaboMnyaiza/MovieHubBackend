@@ -1,27 +1,39 @@
 ﻿@model IList<MovieHub.Web.ViewModels.Customer>
 
 <h1 class="display-5">Customers</h1>
-@if (Model.Count() < 1)
+@if (!Model.Any())
 {
     <p>We don't have any customers yet.</p>
 }
 else
 {
-    <table class="table table-bordered table-hover">
+    <table id="customers" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Customer</th>
                 <th>Membership type</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var customer in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id })</td>
+                    <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
                     <td>@customer.MembershipType.Name</td>
+                    <td>
+                        <button class="btn btn-link" onclick="removeCustomer(@customer.Id)">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@section Scripts {
+    <script>
+        function removeCustomer(id) {
+            console.log(`Customer: ${id}, has been removed!`);
+        }
+    </script>
 }

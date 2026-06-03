@@ -13,6 +13,7 @@ public class CustomerController : Controller
     public CustomerController(ILogger<CustomerController> logger)
     {
         _logger = logger;
+        customers = new List<Customer>();
     }
 
     public IActionResult Index()
@@ -80,11 +81,24 @@ public class CustomerController : Controller
 
     static private Customer CreateCustomer(int id, string name)
     {
-        return new Customer
+        var membership = new MembershipType
+        {
+            Id = 1,
+            Name = "Pay As You Go",
+            SignUpFee = 0,
+            DurationInMonths = 0,
+            DiscountRate = 0,
+        };
+        var customer = new Customer
         {
             Id = id,
             Name = name,
+            Birthdate = new DateTime(),
+            IsSubscribed = false,
+            MembershipType = membership,
         };
+
+        return customer;
     }
 
 
