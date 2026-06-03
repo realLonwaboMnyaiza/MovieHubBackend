@@ -30,9 +30,11 @@ public class CustomerController : Controller
 
     public IActionResult NewCustomer()
     {
+        var customer  = new Customer();
         var membershipTypes = GetMembershipTypes();
         var viewModel = new CustomerForm
         {
+            Customer = customer,
             MembershipTypes = membershipTypes,
         }
 
