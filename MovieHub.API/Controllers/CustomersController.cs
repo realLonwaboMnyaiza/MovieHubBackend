@@ -62,16 +62,12 @@ public class CustomerController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest();
 
-        // todo: use auto mapper. 
         var savedCustomer = _context.Customers.SingleOrDefault(c => c.Id == customer.Id);
 
         if (savedCustomer is null)
             return NotFound();
 
-        savedCustomer.Name = customer.Name;
-        savedCustomer.Birthdate = customer.Birthdate;
-        savedCustomer.MembershipTypeId = customer.MembershipTypeId;
-        savedCustomer.IsSubscribed = customer.IsSubscribed;
+        _mapper.Map<Customer>(customer);
 
         _context.SaveChanges();
 
