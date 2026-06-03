@@ -14,6 +14,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddMaps(typeof(Program).Assembly);
+});
 
 var app = builder.Build();
 
