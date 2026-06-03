@@ -6,3 +6,6 @@ packages
 
 # temp need to use secrets.
 appsettings.json
+
+# temp api needs to be hidden for now.
+MovieHub.API/**
