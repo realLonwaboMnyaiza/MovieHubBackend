@@ -48,16 +48,16 @@ public class CustomerController : Controller
         var viewModel = new CustomerForm
         {
             Customer = customer,
-            MembershipTypes = _context.MembershipTypes.ToList()
+            MembershipTypes = GetMembershipTypes()
         };
 
         return View("CustomerForm", viewModel);
     }
 
     [HttpPost]
-    public IActionResult SubmitCustomerForm(CustomerForm formData) 
+    public IActionResult SubmitCustomerForm(CustomerForm customer) 
     {
-      return RedirectToAction("Index", "Customers");
+      return RedirectToAction("Index", "Customer");
     }
 
     public IActionResult Privacy()
