@@ -1,6 +1,5 @@
 ﻿@model IList<MovieHub.Web.ViewModels.Customer>
 
-<div class="text-center">
     <h1 class="display-5">Customers</h1>
     @if (Model.Count() < 1)
     {
@@ -8,11 +7,20 @@
     }
     else
     {
-        <ul>
-            @foreach (var customer in Model)
-            {
-                <li>@customer.Name</li>
-            }
-        </ul>
+        <table class="table table-bordered table-hover">
+            <thead> 
+                <tr>
+                    <th>Customer</th>
+                    <th>Membership type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id })</td>
+                        <td>@customer.MembershipType.Name</td>
+                    </tr>
+                }
+            </tbody>
     }
-</div>

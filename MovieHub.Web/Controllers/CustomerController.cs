@@ -1,3 +1,4 @@
+using System.Text;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MovieHub.Web.Models;
@@ -8,6 +9,7 @@ namespace MovieHub.Web.Controllers;
 public class CustomerController : Controller
 {
     private readonly ILogger<CustomerController> _logger;
+    private static IList<Customer> customers;
 
     public CustomerController(ILogger<CustomerController> logger)
     {
@@ -16,22 +18,46 @@ public class CustomerController : Controller
 
     public IActionResult Index()
     {
-        var customers = new List<Customer>();
-        var john = new Customer
-        {
-            Id = 1,
-            Name = "John"
-        };
-        var marry = new Customer
-        {
-            Id = 2,
-            Name = "Marry"
-        };
+        var customer1 = CreateCustomer(1, "John");
+        var customer2 = CreateCustomer(2, "Marry");
 
-        customers.Add(john);
-        customers.Add(marry);
+        customers.Add(customer1);
+        customers.Add(customer2);
 
         return View(customers);
+    }
+
+
+    public IActionResult CreateCustomer()
+    {
+        var membershipTypes = GetMembershipTypes();
+        var viewModel = new CustomerForm
+        {
+            MembershipTypes = membershipTypes,
+        }
+
+        return View("CustomerForm", membershipTypes);
+    }
+
+    public IActionResult EditCustomer(int id)
+    {
+        var customer = customers.SingleOrDefault(c => c.id == id);
+
+        if (customer is null) return HttpNotFound();
+
+        var viewModel = new CustomerForm
+        {
+            Customer = customer,
+            MembershipTypes = _context.MembershipTypes.ToList()
+        };
+
+        return View("CustomerForm", viewModel);
+    }
+
+    [HttpPost]
+    public IActionResult SubmitCustomerForm(CustomerForm formData) 
+    {
+      return RedirectToAction("Index", "Customers");
     }
 
     public IActionResult Privacy()
@@ -43,5 +69,30 @@ public class CustomerController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+
+    static private Customer CreateCustomer(int id, string name) 
+    {
+       return new Customer
+        {
+            Id = id,
+            Name = name, 
+        }; 
+    }
+
+
+    static private IList<MembershipType> GetMembershipTypes()
+    {
+        var membershipTypes = new List();
+        var basicPlan = new MembershipType
+        {
+            Id = 1,
+            SignUpFee = 0,
+            DurationInMonths = 0,
+            DiscountRate = 0
+        };
+        membershipTypes.add(basicPlan);
+        return membershipTypes;
     }
 }
