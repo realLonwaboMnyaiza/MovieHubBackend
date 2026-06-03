@@ -43,7 +43,7 @@ public class MovieController : Controller
 
         var viewModel = new MovieForm
         {
-            Customer = customer,
+            Movie = movie,
             Genres = GetMovieGenres()
         };
 
@@ -51,8 +51,12 @@ public class MovieController : Controller
     }
 
     [HttpPost]
-    public IActionResult SubmitMovieForm(MovieForm movie)
+    public IActionResult SubmitMovieForm(MovieForm movieForm)
     {
+        if (!ModelState.IsValid)
+        {
+            return View("MovieForm", movieForm)
+        }
         return RedirectToAction("Index", "Movie");
     }
 
