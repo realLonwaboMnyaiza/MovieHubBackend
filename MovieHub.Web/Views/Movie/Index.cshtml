@@ -1,20 +1,20 @@
 @model IList<MovieHub.Web.ViewModels.Movie>
 
-    <h1 class="display-5">Movies</h1>
-    @if (Model.Count() == 0)
-    {
-        <p>We don't have any movies yet.</p>
-    }
-    else
-    {
-        <table class="table table-bordered table-hover">
-            <thead> 
-                <tr>
-                    <th>Customer</th>
-                    <th>Membership type</th>
-                </tr>
-            </thead>
-            <tbody>
+<h1 class="display-5">Movies</h1>
+@if (!Model.Any())
+{
+    <p>We don't have any movies yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Membership type</th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var movie in Model)
             {
                 <tr>
@@ -22,6 +22,6 @@
                     <td>@movie.NumberInStock</td>
                 </tr>
             }
-            </tbody>
-        </table>
-    }
+        </tbody>
+    </table>
+}
